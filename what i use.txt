@@ -1,0 +1,13 @@
+https://habr.com/ru/post/439330/
+
+для выделения
+https://www.robots.ox.ac.uk/~vgg/software/via/
+
+https://www.google.com/search?q=Mask+RCNN&sourceid=chrome&ie=UTF-8
+https://habr.com/ru/post/421299/
+
+https://github.com/ria-com/nomeroff-net
+https://github.com/matterport/Mask_RCNN
+
+https://colab.research.google.com/drive/1spi6jlCnbFWSrp5rv5NTPUxgr5DODaX8?usp=sharing#scrollTo=10g9FTIpxK2P
+https://colab.research.google.com/drive/1O6PS6v6IE3zaAdPORC9Z1qWDwRgah99A?usp=sharing#scrollTo=1udoJrnAX9pX
