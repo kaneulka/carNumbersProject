@@ -15,10 +15,10 @@ from yolo3.utils import get_random_data
 
 def _main():
     # './export/_annotations.txt'
-    annotation_path = '../Data/train/_annotations.txt'#_annotations.txt'
+    annotation_path = 'Data/train/_annotations.txt'#_annotations.txt'
     log_dir = 'logs/000/'
     # './export/_annotations.txt'
-    classes_path = '../Data/train/_classes.txt'
+    classes_path = 'Data/train/_classes.txt'
     anchors_path = 'model_data/yolo_anchors.txt'
     class_names = get_classes(classes_path)
     print("-------------------CLASS NAMES-------------------")
@@ -68,6 +68,7 @@ def _main():
                 epochs=500,
                 initial_epoch=0,
                 callbacks=[logging, checkpoint])
+        
         model.save_weights(log_dir + 'trained_weights_stage_1.h5')
 
     # Unfreeze and continue training, to fine-tune.

@@ -19,3 +19,5 @@ https://app.roboflow.com/edu/car-numbers-8tl4j/1    - для генерации 
 
 convert.py 
 train.py
+
+
