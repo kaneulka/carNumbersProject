@@ -4,8 +4,11 @@
 2. Разметил и расширил их с помощью проекта - https://app.roboflow.com/edu/car-numbers-8tl4j/1
 3. Сделал копию репозитория для Windows - https://github.com/roboflow-ai/keras-yolo3
 4. Запустил train.py с настройками к modelTraining\keras-yolo3-master\Data\test_annotations.txt и modelTraining\keras-yolo3-master\Data\test_classes.txt согласно следующей ссылки - https://colab.research.google.com/drive/1ByRi9d6_Yzu0nrEKArmLMLuMaZjYfygO#scrollTo=4hBFndz8VeI6
-5. Ссылка на обученую модель нужно расположить по "modelTraining\keras-yolo3-master\logs\000\trained_weights_stage_1.h5":   
-            https://drive.google.com/file/d/1UEsQNRBv1H1K44DEuIcTfAtxtykpaS6n/view?usp=share_link
+5. Ссылка на обученую модель нужно расположить по 
+            ~~("modelTraining\keras-yolo3-master\logs\000\trained_weights_stage_1.h5":   
+            https://drive.google.com/file/d/1UEsQNRBv1H1K44DEuIcTfAtxtykpaS6n/view?usp=share_link)~~
+            (Модель:https://drive.google.com/file/d/1cUimnMvj4cfVwf_F_SM9Qyznvb80XeIj/view?usp=share_link
+            Путь: config\lapi.weights и modelTraining\config\lapi.weights)
 6. Установка tesseract - https://github.com/UB-Mannheim/tesseract/wiki и установка git - https://github.com/madmaze/pytesseract
 7.
 
