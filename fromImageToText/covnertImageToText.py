@@ -3,10 +3,11 @@ import pytesseract
 import cv2
 import os
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-image = base_dir + r'\tmp\test.PNG'
+#image = base_dir + r'\tmp\test.PNG'
+image = base_dir + r'\tests\data\IgorVasiliev.jpg_masked.jpg' #r'\tests\data\test.png'
 d = Image.open(image)
 preprocess = "thresh"
 

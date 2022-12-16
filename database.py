@@ -27,11 +27,11 @@ newUsers = [(1, 'Иван', 'Иванов'),
       (5, 'Петр', 'Васильев')]
 cursor.executemany("INSERT INTO users VALUES(?, ?, ?);", newUsers)
 
-newCars = [(1,  'Х045ЕР777', 'ВАЗ 2106', 1), 
-      (2, 'К555МС55', 'BMW X3?', 1), 
-      (3, 'О751АА98', 'Ford Focus 3', 3), 
-      (4, 'Е060КХ177', 'Ford Focus 5', 4), 
-      (5, 'Е536КХ177', 'Ford Focus 5', 2)]
+newCars = [(1,  'X045EP777', 'ВАЗ 2106', 1), 
+      (2, 'K555MC55', 'BMW X3?', 1), 
+      (3, 'O751AA98', 'Ford Focus 3', 3), 
+      (4, 'E060KX177', 'Ford Focus 5', 4), 
+      (5, 'E536KX177', 'Ford Focus 5', 2)]
 cursor.executemany("INSERT INTO cars VALUES(?, ?, ?, ?);", newCars)
 con.commit()
 
