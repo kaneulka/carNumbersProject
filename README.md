@@ -10,7 +10,6 @@
             (Модель:https://drive.google.com/file/d/1cUimnMvj4cfVwf_F_SM9Qyznvb80XeIj/view?usp=share_link
             Путь: config\lapi.weights и modelTraining\config\lapi.weights)
 6. Установка tesseract - https://github.com/UB-Mannheim/tesseract/wiki и установка git - https://github.com/madmaze/pytesseract
-7.
 
 Полезные ресурсы:
 

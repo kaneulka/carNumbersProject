@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import os
 import pytesseract
+import re
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -81,53 +82,50 @@ def work_with_image(imageArg):
 
 con = sqlite3.connect("TestDB") 
 cursor = con.cursor()
-getUserInfo = con.cursor()
-query = "SELECT * FROM users INNER JOIN cars ON users.userId = cars.userId;"
-cursor.execute(query)
-data = cursor.fetchall()
-
-carNumbers = []
-for line in data:
-    carNumbers.append(line[4])
 
 configArg = "config/darknet-yolov3.cfg"
 weightsArg = "config/lapi.weights"
 classesArg = "config/classes.names"
 
 for imageName in os.listdir("inputImages"):
-    image = imageName
-    work_with_image(image)
-    
-    # загрузить образ и преобразовать его в оттенки серого
-    cutImage = "outputImages/" + image + "_masked.jpg"
-    converCutImage = np.array(Image.open(cutImage)) #"outputImages/" + image + "_masked.jpg"
-    preprocess = "thresh"
-    gray = cv2.cvtColor(converCutImage, cv2.COLOR_BGR2GRAY)
-    
-    # проверьте, следует ли применять пороговое значение для предварительной обработки изображения
-    if preprocess == "thresh":
-        gray = cv2.threshold(gray, 0, 255,
-            cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
-    # если нужно медианное размытие, чтобы удалить шум
-    elif preprocess == "blur":
-        gray = cv2.medianBlur(gray, 3)
-        
-    # сохраним временную картинку в оттенках серого, чтобы можно было применить к ней OCR
-    filename_dir = "outputImages/gray/{}.png".format(os.getpid())
-    cv2.imwrite(filename_dir, gray)
-    
-    # загрузка изображения в виде объекта image Pillow, применение OCR, а затем удаление временного файла
-    text = pytesseract.image_to_string(Image.open(filename_dir))
-    print(text)
-    os.remove(filename_dir)
-    #os.remove(cutImage)
-
-    #Поиск номера в базе
-    carIsExist = ""
     try:
-        query = "SELECT * FROM users INNER JOIN cars ON users.userId = cars.userId WHERE carNumber={text};"
-        getUserInfo.execute(query)
-        carData = getUserInfo.fetchall()
-        print(carData)
+        image = imageName
+        work_with_image(image)
+
+        # загрузить образ и преобразовать его в оттенки серого
+        cutImage = "outputImages/" + image + "_masked.jpg"
+        converCutImage = np.array(Image.open(cutImage)) #"outputImages/" + image + "_masked.jpg"
+        preprocess = "thresh"
+        gray = cv2.cvtColor(converCutImage, cv2.COLOR_BGR2GRAY)
+
+        # проверьте, следует ли применять пороговое значение для предварительной обработки изображения
+        if preprocess == "thresh":
+            gray = cv2.threshold(gray, 0, 255,
+                cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+        # если нужно медианное размытие, чтобы удалить шум
+        elif preprocess == "blur":
+            gray = cv2.medianBlur(gray, 3)
+
+        # сохраним временную картинку в оттенках серого, чтобы можно было применить к ней OCR
+        filename_dir = "outputImages/gray/{}.png".format(os.getpid())
+        cv2.imwrite(filename_dir, gray)
+
+        # загрузка изображения в виде объекта image Pillow, применение OCR, а затем удаление временного файла
+        text = pytesseract.image_to_string(Image.open(filename_dir))
+        text = re.sub("[^A-Za-z1-90]", "", text).upper()
+        #print(text)
+        os.remove(filename_dir)
+        os.remove(cutImage)
+
+        #Поиск номера в базе
+        query = "SELECT users.userId, users.fname, users.lname, cars.carModel, cars.carNumber FROM users INNER JOIN cars ON users.userId = cars.userId WHERE carNumber='" + text + "';"
+        cursor.execute(query)
+        data = cursor.fetchall()
+        if len(data) > 0:
+            print(data)
+        else:
+            print("Машина не в базе!")
+            
+    #Если номер не распознан
     except:
-        print("Car not in database!")
+        print("Номер нераспознан!")
